@@ -5,14 +5,28 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      genres: []
+      genres: [],
+      selectedGenre: null
     };
+    this.handleChangeFavorite = this.handleChangeFavorite.bind(this);
+    this.handleMovieSearch = this.handleMovieSearch.bind(this);
   }
+
   getGenres() {
     axios.get('/genres').then(genres => {
       genres = genres.data.genres;
-      this.setState({ genres });
+      this.setState({ genres }, () => {
+        this.setState({ selectedGenre: this.state.genres[0].id });
+      });
     });
+  }
+
+  handleChangeFavorite(e) {
+    this.setState({ selectedGenre: e.target.value });
+  }
+
+  handleMovieSearch() {
+    this.props.getMovies(this.state.selectedGenre.toString());
   }
 
   componentDidMount() {
@@ -35,7 +49,7 @@ class Search extends React.Component {
         {/* Make the select options dynamic from genres !!! */}
         {/* How can you tell which option has been selected from here? */}
 
-        <select>
+        <select onChange={this.handleChangeFavorite}>
           {this.state.genres.map(genre => {
             return (
               <option key={genre.id} value={genre.id}>
@@ -47,7 +61,7 @@ class Search extends React.Component {
         <br />
         <br />
 
-        <button>Search</button>
+        <button onClick={this.handleMovieSearch}>Search</button>
       </div>
     );
   }

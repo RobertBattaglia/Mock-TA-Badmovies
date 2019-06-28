@@ -18,7 +18,6 @@ app.get('/genres', function(req, res) {
   apiHelpers
     .getGenres()
     .then(({ data }) => {
-      console.log(data);
       res.send(data);
     })
     .catch(err => {
@@ -27,9 +26,9 @@ app.get('/genres', function(req, res) {
     });
 });
 
-app.get('/search', function(req, res) {
+app.get('/search/:genreId', function(req, res) {
   apiHelpers
-    .getMovies()
+    .getMovies(req.params.genreId)
     .then(({ data }) => {
       res.send(JSON.stringify(data.results));
     })

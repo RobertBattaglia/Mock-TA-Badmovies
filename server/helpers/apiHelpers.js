@@ -2,10 +2,10 @@ const request = require('request');
 const axios = require('axios');
 const { API_KEY } = require('../../config.js');
 
-const getMovies = () => {
+const getMovies = genreId => {
   const config = {
     method: 'GET',
-    url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false`
+    url: `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.asc&include_adult=true&include_video=false&with_genres=${genreId}`
   };
   return axios(config);
 };

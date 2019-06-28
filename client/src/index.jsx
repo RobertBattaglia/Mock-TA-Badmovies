@@ -12,12 +12,11 @@ class App extends React.Component {
       favorites: [{ deway: 'favorites' }],
       showFaves: false
     };
-
-    // you might have to do something important here!
+    this.getMovies = this.getMovies.bind(this);
   }
 
-  getMovies() {
-    axios.get('/search').then(movies => {
+  getMovies(genreId) {
+    axios.get(`/search/${genreId}`).then(movies => {
       this.setState({ movies });
     });
   }
@@ -48,6 +47,7 @@ class App extends React.Component {
           <Search
             swapFavorites={this.swapFavorites}
             showFaves={this.state.showFaves}
+            getMovies={this.getMovies}
           />
           <Movies
             movies={
