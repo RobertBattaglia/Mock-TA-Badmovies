@@ -39,12 +39,12 @@ app.get('/search/:genreId', function(req, res) {
     });
 });
 
-app.post('/save', function(req, res) {
+app.post('/movie', function(req, res) {
   movieController.saveMovie(req, res);
 });
 
-app.post('/delete', function(req, res) {
-  //remove movie from favorites
+app.delete('/movie', function(req, res) {
+  movieController.deleteMovie(req, res);
 });
 
 //OPTION 2: Use Express Router

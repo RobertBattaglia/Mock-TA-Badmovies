@@ -17,14 +17,27 @@ module.exports = {
     // send back
   },
   saveMovie: (req, res) => {
-    movieModel.save(req.body, (err, data) => {
+    movieModel.save(req.body, err => {
+      if (err) {
+        if (err.code === 'ER_DUP_ENTRY') {
+          res.status(400).send('Duplicate Favorite Entry');
+        } else {
+          console.log(err);
+          res.sendStatus(500);
+        }
+      } else {
+        res.sendStatus(201);
+      }
+    });
+  },
+  deleteMovie: (req, res) => {
+    movieModel.delete(req.body, err => {
       if (err) {
         console.log(err);
         res.sendStatus(500);
       } else {
-        res.status(201).send(data);
+        res.sendStatus(202);
       }
     });
-  },
-  deleteMovie: (req, res) => {}
+  }
 };
