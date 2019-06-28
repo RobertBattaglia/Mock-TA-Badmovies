@@ -91,4 +91,7 @@ typings/
 # configuration
 config.js
 
+# bundle
+client/dist/bundle.js
+
 # End of https://www.gitignore.io/api/node
