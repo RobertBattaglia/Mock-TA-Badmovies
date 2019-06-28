@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var request = require('request');
+var movieController = require('./controllers/movieController.js');
+
 var app = express();
 
 //Helpers
@@ -39,7 +40,7 @@ app.get('/search/:genreId', function(req, res) {
 });
 
 app.post('/save', function(req, res) {
-  //save movie as favorite
+  movieController.saveMovie(req, res);
 });
 
 app.post('/delete', function(req, res) {

@@ -1,4 +1,12 @@
 const mysql = require('mysql');
 const mysqlConfig = require('../../config.js');
 
-const connection = mysql.createConnection(mysqlConfig);
+module.exports = mysql.createConnection(mysqlConfig);
+
+module.exports.connect(err => {
+  if (err) {
+    throw console.log(err);
+  } else {
+    console.log('Connected to MySQL db...');
+  }
+});
