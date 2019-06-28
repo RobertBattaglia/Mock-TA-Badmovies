@@ -10,6 +10,15 @@ const getMovies = () => {
   return axios(config);
 };
 
+const getGenres = () => {
+  const config = {
+    method: 'GET',
+    url: `https://api.themoviedb.org/3/genre/movie/list?language=en-US&api_key=${API_KEY}`
+  };
+  return axios(config);
+};
+
 module.exports = {
-  getMovies
+  getMovies,
+  getGenres
 };
