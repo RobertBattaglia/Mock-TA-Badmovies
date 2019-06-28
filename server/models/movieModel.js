@@ -34,5 +34,15 @@ module.exports = {
         cb(null, data);
       }
     });
+  },
+  get: cb => {
+    const sql = 'SELECT * FROM favorites';
+    sqlDb.query(sql, null, (err, data) => {
+      if (err) {
+        cb(err);
+      } else {
+        cb(null, data);
+      }
+    });
   }
 };

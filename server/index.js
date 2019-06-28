@@ -38,6 +38,9 @@ app.get('/search/:genreId', function(req, res) {
       res.sendStatus(500);
     });
 });
+app.get('/movie', function(req, res) {
+  movieController.getFavorites(req, res);
+});
 
 app.post('/movie', function(req, res) {
   movieController.saveMovie(req, res);

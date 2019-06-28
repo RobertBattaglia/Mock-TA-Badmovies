@@ -14,6 +14,13 @@ class App extends React.Component {
     };
     this.getMovies = this.getMovies.bind(this);
     this.saveMovie = this.saveMovie.bind(this);
+    this.getFavorites = this.getFavorites.bind(this);
+  }
+
+  getFavorites() {
+    axios.get('/movie').then(({ data }) => {
+      this.setState({ favorites: data });
+    });
   }
 
   getMovies(genreId) {
@@ -30,9 +37,14 @@ class App extends React.Component {
       release_date: m.release_date,
       popularity: m.popularity
     };
-    axios.post('/movie', { movie }).catch(err => {
-      console.log(err);
-    });
+    axios
+      .post('/movie', { movie })
+      .then(({ data }) => {
+        this.setState({ favorites: data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   deleteMovie(id) {
@@ -46,6 +58,9 @@ class App extends React.Component {
     });
   }
 
+  componentDidMount() {
+    this.getFavorites();
+  }
   render() {
     return (
       <div className="app">

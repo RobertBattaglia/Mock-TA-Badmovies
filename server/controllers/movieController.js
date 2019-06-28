@@ -16,6 +16,15 @@ module.exports = {
     // use this endpoint, which will also require your API key: https://api.themoviedb.org/3/genre/movie/list
     // send back
   },
+  getFavorites: (req, res) => {
+    movieModel.get((err, data) => {
+      if (err) {
+        res.send(500);
+      } else {
+        res.status(200).send(data);
+      }
+    });
+  },
   saveMovie: (req, res) => {
     movieModel.save(req.body.movie, err => {
       if (err) {
@@ -26,7 +35,14 @@ module.exports = {
           res.sendStatus(500);
         }
       } else {
-        res.sendStatus(201);
+        movieModel.get((err, data) => {
+          if (err) {
+            console.log(err);
+            res.sendStatus(500);
+          } else {
+            res.status(201).send(data);
+          }
+        });
       }
     });
   },
@@ -36,7 +52,14 @@ module.exports = {
         console.log(err);
         res.sendStatus(500);
       } else {
-        res.sendStatus(202);
+        movieModel.get((err, data) => {
+          if (err) {
+            console.log(err);
+            res.sendStatus(500);
+          } else {
+            res.status(202).send(data);
+          }
+        });
       }
     });
   }
