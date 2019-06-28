@@ -1,9 +1,14 @@
 import React from 'react';
 
-const Movie = ({ movie }) => {
+const Movie = ({ saveMovie, movie }) => {
   return (
     <React.Fragment>
-      <li className="movie_item">
+      <li
+        className="movie_item"
+        onClick={() => {
+          saveMovie(movie);
+        }}
+      >
         <img src={'https://image.tmdb.org/t/p/original' + movie.poster_path} />
         <div className="movie_description">
           <h2>{movie.title}</h2>

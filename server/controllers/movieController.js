@@ -17,7 +17,7 @@ module.exports = {
     // send back
   },
   saveMovie: (req, res) => {
-    movieModel.save(req.body, err => {
+    movieModel.save(req.body.movie, err => {
       if (err) {
         if (err.code === 'ER_DUP_ENTRY') {
           res.status(400).send('Duplicate Favorite Entry');

@@ -13,6 +13,7 @@ class App extends React.Component {
       showFaves: false
     };
     this.getMovies = this.getMovies.bind(this);
+    this.saveMovie = this.saveMovie.bind(this);
   }
 
   getMovies(genreId) {
@@ -21,11 +22,20 @@ class App extends React.Component {
     });
   }
 
-  saveMovie() {
-    // same as above but do something diff
+  saveMovie(m) {
+    var movie = {
+      id: m.id,
+      title: m.title,
+      poster_path: m.poster_path,
+      release_date: m.release_date,
+      popularity: m.popularity
+    };
+    axios.post('/movie', { movie }).catch(err => {
+      console.log(err);
+    });
   }
 
-  deleteMovie() {
+  deleteMovie(id) {
     // same as above but do something diff
   }
 
@@ -53,6 +63,7 @@ class App extends React.Component {
             movies={
               this.state.showFaves ? this.state.favorites : this.state.movies
             }
+            saveMovie={this.saveMovie}
             showFaves={this.state.showFaves}
           />
         </div>
