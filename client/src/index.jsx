@@ -8,16 +8,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: [{ deway: 'movies' }],
-      favorites: [{ deway: 'favorites' }],
+      movies: [],
+      favorites: [],
       showFaves: false
     };
     this.getMovies = this.getMovies.bind(this);
   }
 
   getMovies(genreId) {
-    axios.get(`/search/${genreId}`).then(movies => {
-      this.setState({ movies });
+    axios.get(`/search/${genreId}`).then(({ data }) => {
+      this.setState({ movies: data });
     });
   }
 
