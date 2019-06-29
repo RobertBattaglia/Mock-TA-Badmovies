@@ -26,7 +26,7 @@ class App extends React.Component {
   }
 
   getMovies(genreId) {
-    axios.get(`/search/${genreId}`).then(({ data }) => {
+    axios.get(`/movie/search/${genreId}`).then(({ data }) => {
       this.setState({ movies: data });
     });
   }

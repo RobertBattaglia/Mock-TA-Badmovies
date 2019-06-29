@@ -7,11 +7,11 @@ var app = express();
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client/dist'));
 
-app.get('/genres', function(req, res) {
+app.get('/movie/genres', function(req, res) {
   movieController.getGenres(req, res);
 });
 
-app.get('/search/:genreId', function(req, res) {
+app.get('/movie/search/:genreId', function(req, res) {
   movieController.getSearch(req, res);
 });
 app.get('/movie', function(req, res) {

@@ -13,7 +13,7 @@ class Search extends React.Component {
   }
 
   getGenres() {
-    return axios.get('/genres').then(genres => {
+    return axios.get('/movie/genres').then(genres => {
       genres = genres.data.genres;
       this.setState({ genres }, () => {
         this.setState({ selectedGenre: this.state.genres[0].id });
