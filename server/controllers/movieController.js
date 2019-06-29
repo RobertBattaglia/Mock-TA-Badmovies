@@ -24,15 +24,6 @@ module.exports = {
         res.sendStatus(500);
       });
   },
-  getFavorites: (req, res) => {
-    movieModel.get((err, data) => {
-      if (err) {
-        res.send(500);
-      } else {
-        res.status(200).send(data);
-      }
-    });
-  },
   saveMovie: (req, res) => {
     movieModel.save(req.body.movie, err => {
       if (err) {
@@ -68,6 +59,15 @@ module.exports = {
             res.status(202).send(data);
           }
         });
+      }
+    });
+  },
+  getFavorites: (req, res) => {
+    movieModel.get((err, data) => {
+      if (err) {
+        res.send(500);
+      } else {
+        res.status(200).send(data);
       }
     });
   }

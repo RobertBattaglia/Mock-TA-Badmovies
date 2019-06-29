@@ -7,6 +7,20 @@ if (process.env.MONGODB_URI) {
   });
 }
 
+const schema = new mongoose.Schema({
+  id: {
+    type: Number,
+    unique: true,
+    required: true
+  },
+  title: String,
+  poster_path: String,
+  release_date: String,
+  popularity: Number
+});
+
+const favorites = mongoose.model('favorites', schema);
+
 const db = mongoose.connection;
 
 mongoose.Promise = Promise;
@@ -15,4 +29,4 @@ db.once('open', () => {
   console.log('Connected to mongo db...');
 });
 
-module.exports.db = db;
+module.exports.favorites = favorites;
