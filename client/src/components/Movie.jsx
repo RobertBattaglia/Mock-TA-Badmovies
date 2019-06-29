@@ -9,7 +9,13 @@ const Movie = ({ showFaves, deleteMovie, saveMovie, movie }) => {
           showFaves ? deleteMovie(movie.id) : saveMovie(movie);
         }}
       >
-        <img src={'https://image.tmdb.org/t/p/original' + movie.poster_path} />
+        <img
+          src={
+            movie.poster_path === null
+              ? ''
+              : 'https://image.tmdb.org/t/p/original' + movie.poster_path
+          }
+        />
         <div className="movie_description">
           <h2>{movie.title}</h2>
           <section className="movie_details">

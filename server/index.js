@@ -4,39 +4,15 @@ var movieController = require('./controllers/movieController.js');
 
 var app = express();
 
-//Helpers
-var apiHelpers = require('./helpers/apiHelpers.js');
-
-//Middleware
 app.use(bodyParser.json());
-
-// Due to express, when you load the page, it doesn't make a get request to '/', it simply serves up the dist folder
 app.use(express.static(__dirname + '/../client/dist'));
 
-//OPTION 1: Use regular routes
-
 app.get('/genres', function(req, res) {
-  apiHelpers
-    .getGenres()
-    .then(({ data }) => {
-      res.send(data);
-    })
-    .catch(err => {
-      console.log(err);
-      res.sendStatus(500);
-    });
+  movieController.getGenres(req, res);
 });
 
 app.get('/search/:genreId', function(req, res) {
-  apiHelpers
-    .getMovies(req.params.genreId)
-    .then(({ data }) => {
-      res.send(JSON.stringify(data.results));
-    })
-    .catch(err => {
-      console.log(err);
-      res.sendStatus(500);
-    });
+  movieController.getSearch(req, res);
 });
 app.get('/movie', function(req, res) {
   movieController.getFavorites(req, res);
