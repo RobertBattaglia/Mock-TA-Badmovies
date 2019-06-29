@@ -5,7 +5,7 @@ const favorites = require('../../db/mongodb').favorites;
 module.exports = {
   save: (movie, cb) => {
     favorites
-      .create(movie)
+      .findOneAndUpdate({ id: movie.id }, movie, { upsert: true })
       .then(data => {
         cb(null, data);
       })
@@ -13,8 +13,26 @@ module.exports = {
         cb(err);
       });
   },
-  delete: () => {},
-  get: () => {}
+  delete: (id, cb) => {
+    favorites
+      .deleteOne({ id })
+      .then(data => {
+        cb(null, data);
+      })
+      .catch(err => {
+        cb(err);
+      });
+  },
+  get: cb => {
+    favorites
+      .find()
+      .then(data => {
+        cb(null, data);
+      })
+      .catch(err => {
+        cb(err);
+      });
+  }
 };
 
 //For SQL
