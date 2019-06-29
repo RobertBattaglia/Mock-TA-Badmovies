@@ -1,48 +1,39 @@
-//SELECT one db to work with
-//For Mongo
-// const mongoDb = require('../../db/mongodb')
-
-//For SQL
-const sqlDb = require('../../db/sql');
+// Using sequelize
+const favorites = require('../../db/sql/orm.js');
 
 module.exports = {
   save: (movie, cb) => {
-    const sql = `INSERT INTO favorites
-    (id, title, poster_path, release_date, popularity)
-    VALUES (?, ?, ?, ?, ?)`;
-    const vals = [
-      movie.id,
-      movie.title,
-      movie.poster_path,
-      movie.release_date,
-      movie.popularity
-    ];
-    sqlDb.query(sql, vals, (err, data) => {
-      if (err) {
-        cb(err);
-      } else {
+    favorites
+      .create(movie)
+      .then(data => {
         cb(null, data);
-      }
-    });
+      })
+      .catch(err => {
+        cb(err);
+      });
   },
   delete: (id, cb) => {
-    const sql = `DELETE FROM favorites WHERE id = (?)`;
-    sqlDb.query(sql, [id], (err, data) => {
-      if (err) {
-        cb(err);
-      } else {
+    favorites
+      .destroy({
+        where: {
+          id
+        }
+      })
+      .then(data => {
         cb(null, data);
-      }
-    });
+      })
+      .catch(err => {
+        cb(err);
+      });
   },
   get: cb => {
-    const sql = 'SELECT * FROM favorites';
-    sqlDb.query(sql, null, (err, data) => {
-      if (err) {
-        cb(err);
-      } else {
+    favorites
+      .findAll()
+      .then(data => {
         cb(null, data);
-      }
-    });
+      })
+      .catch(err => {
+        cb(err);
+      });
   }
 };
