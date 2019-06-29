@@ -1,5 +1,5 @@
 // Using sequelize
-const favorites = require('../../db/sql/orm.js');
+const favorites = require('../../db/sql');
 
 module.exports = {
   save: (movie, cb) => {
