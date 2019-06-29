@@ -6,7 +6,13 @@ const Movies = props => {
     <ul className="movies">
       {props.movies.map(movie => {
         return (
-          <Movie key={movie.id} saveMovie={props.saveMovie} movie={movie} />
+          <Movie
+            key={movie.id}
+            movie={movie}
+            saveMovie={props.saveMovie}
+            deleteMovie={props.deleteMovie}
+            showFaves={props.showFaves}
+          />
         );
       })}
     </ul>

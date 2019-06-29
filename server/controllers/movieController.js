@@ -47,7 +47,7 @@ module.exports = {
     });
   },
   deleteMovie: (req, res) => {
-    movieModel.delete(req.body, err => {
+    movieModel.delete(req.params.id, err => {
       if (err) {
         console.log(err);
         res.sendStatus(500);

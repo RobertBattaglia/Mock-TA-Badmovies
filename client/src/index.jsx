@@ -14,7 +14,9 @@ class App extends React.Component {
     };
     this.getMovies = this.getMovies.bind(this);
     this.saveMovie = this.saveMovie.bind(this);
+    this.deleteMovie = this.deleteMovie.bind(this);
     this.getFavorites = this.getFavorites.bind(this);
+    this.swapFavorites = this.swapFavorites.bind(this);
   }
 
   getFavorites() {
@@ -39,16 +41,14 @@ class App extends React.Component {
     };
     axios
       .post('/movie', { movie })
-      .then(({ data }) => {
-        this.setState({ favorites: data });
-      })
+      .then(this.getFavorites())
       .catch(err => {
         console.log(err);
       });
   }
 
   deleteMovie(id) {
-    // same as above but do something diff
+    axios.delete(`/movie/${id}`).then(this.getFavorites());
   }
 
   swapFavorites() {
@@ -79,6 +79,7 @@ class App extends React.Component {
               this.state.showFaves ? this.state.favorites : this.state.movies
             }
             saveMovie={this.saveMovie}
+            deleteMovie={this.deleteMovie}
             showFaves={this.state.showFaves}
           />
         </div>

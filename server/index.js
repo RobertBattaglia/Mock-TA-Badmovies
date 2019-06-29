@@ -46,7 +46,7 @@ app.post('/movie', function(req, res) {
   movieController.saveMovie(req, res);
 });
 
-app.delete('/movie', function(req, res) {
+app.delete('/movie/:id', function(req, res) {
   movieController.deleteMovie(req, res);
 });
 
